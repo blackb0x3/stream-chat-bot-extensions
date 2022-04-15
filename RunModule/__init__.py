@@ -1,5 +1,6 @@
 import importlib
 from shared.enums import HttpStatusCode
+from shared import helpers
 
 import azure.functions as func
 import logging
@@ -18,8 +19,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         logging.info(args)
 
         module_type = importlib.import_module(f'modules.{bot_module_name.lower()}')
-        bot_module = getattr(module_type, bot_module_name)()
-        result = getattr(bot_module, command_name)(**args)
+        bot_module = helpers.igetattr(module_type, bot_module_name)()
+        result = helpers.igetattr(bot_module, command_name)(**args)
 
         return func.HttpResponse(
             #"This HTTP triggered function executed successfully.",
