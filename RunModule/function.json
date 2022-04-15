@@ -2,7 +2,7 @@
   "scriptFile": "__init__.py",
   "bindings": [
     {
-      "route": "{moduleName}/{commandName}/{args}",
+      "route": "{moduleName}/{commandName}",
       "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
