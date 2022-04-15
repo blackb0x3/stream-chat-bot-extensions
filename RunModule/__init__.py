@@ -27,6 +27,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             str(result),
             status_code=HttpStatusCode.OK.value
         )
+    except ValueError as error:
+        # not gonna bother logging here, as these are for known errors caused by e.g. bad user input
+        return func.HttpResponse(
+            #"This HTTP triggered function executed successfully.",
+            error.args[0],
+            status_code=HttpStatusCode.INTERNAL_SERVER_ERROR.value
+        )
     except Exception:
         # any expected errors get logged here
         message = 'unexpected error occurred'
