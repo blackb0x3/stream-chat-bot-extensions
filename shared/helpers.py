@@ -22,3 +22,7 @@ def igetattr(obj: object, name: str, /) -> Any:
     for a in dir(obj):
         if a.lower() == name.lower():
             return builtins.getattr(obj, a)
+
+
+def is_none_empty_or_whitespace(s: str):
+    return s is None or len(s) < 1 or str.isspace(s)
