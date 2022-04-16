@@ -1,5 +1,4 @@
-from shared.enums import HttpStatusCode
-from shared import helpers
+from shared import enums, helpers
 
 import azure.functions as func
 import importlib
@@ -25,14 +24,14 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
             #"This HTTP triggered function executed successfully.",
             str(result),
-            status_code=HttpStatusCode.OK.value
+            status_code=enums.HttpStatusCode.OK.value
         )
     except ValueError as error:
         # not gonna bother logging here, as these are for known errors caused by e.g. bad user input
         return func.HttpResponse(
             #"This HTTP triggered function executed successfully.",
             error.args[0],
-            status_code=HttpStatusCode.INTERNAL_SERVER_ERROR.value
+            status_code=enums.HttpStatusCode.INTERNAL_SERVER_ERROR.value
         )
     except Exception:
         # any expected errors get logged here
@@ -42,5 +41,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
             #"This HTTP triggered function executed successfully.",
             message,
-            status_code=HttpStatusCode.INTERNAL_SERVER_ERROR.value
+            status_code=enums.HttpStatusCode.INTERNAL_SERVER_ERROR.value
         )
