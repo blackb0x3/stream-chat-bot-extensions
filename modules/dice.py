@@ -9,7 +9,7 @@ class Dice(object):
     def __init__(self) -> None:
         pass
 
-    def roll(self, **kwargs):
+    async def roll(self, **kwargs):
         dice_min = int(kwargs.get('min', DEFAULT_MIN))
         dice_max = int(kwargs.get('max', DEFAULT_MAX))
         times_to_roll = int(kwargs.get('amount_to_roll', DEFAULT_TIMES_TO_ROLL))

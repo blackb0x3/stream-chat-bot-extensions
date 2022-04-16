@@ -8,17 +8,17 @@ class CoinToss(object):
     def __init__(self) -> None:
         pass
 
-    def heads(self):
+    async def heads(self):
         return HEADS
 
-    def tails(self):
+    async def tails(self):
         return TAILS
 
-    def flip(self):
+    async def flip(self):
         show_heads = helpers.get_random_bool()
         return HEADS if show_heads else TAILS
 
-    def customflip(self, **kwargs):
+    async def customflip(self, **kwargs):
         heads_choice = kwargs.get('heads', HEADS)
         tails_choice = kwargs.get('tails', TAILS)
         flip = self.flip()

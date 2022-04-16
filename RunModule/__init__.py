@@ -19,7 +19,7 @@ async def main(req: func.HttpRequest) -> func.HttpResponse:
 
         module_type = importlib.import_module(f'modules.{bot_module_name.lower()}')
         bot_module = helpers.igetattr(module_type, bot_module_name)()
-        result = helpers.igetattr(bot_module, command_name)(**args)
+        result = await helpers.igetattr(bot_module, command_name)(**args)
 
         return func.HttpResponse(
             #"This HTTP triggered function executed successfully.",
