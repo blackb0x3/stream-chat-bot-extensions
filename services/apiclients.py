@@ -8,6 +8,7 @@ API_NINJAS_DOMAIN = 'https://api.api-ninjas.com'
 API_NINJAS_API_KEY_CONFIG_NAME = 'ApiNinjasApiKey'
 API_NINJAS_API_KEY_HEADER_NAME = 'X-Api-Key'
 QUOTES_ENDPOINT = '/v1/quotes'
+POKEAPI_GET_POKEMON_ENDPOINT = '/api/v2/pokemon'
 
 
 class ApiNinjasClient(object):
@@ -37,3 +38,16 @@ class ApiNinjasClient(object):
         return {
             API_NINJAS_API_KEY_HEADER_NAME : self.api_key
         }
+
+
+class PokeapiClient(object):
+    def __init__(self) -> None:
+        self.session = aiohttp.ClientSession(base_url='https://pokeapi.co')
+
+    async def get_pokemon(self, name: str):
+        async with self.session as sesh:
+            async with sesh.get(f'{POKEAPI_GET_POKEMON_ENDPOINT}/{name}') as response:
+                if response.status == enums.HttpStatusCode.OK.value:
+                    return await response.json()
+                else:
+                    raise RuntimeError(response.text())
