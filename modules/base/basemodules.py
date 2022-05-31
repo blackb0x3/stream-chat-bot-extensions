@@ -11,12 +11,12 @@ class RockPaperScissorsBase(object):
     SPOCK = 'spock'
 
     def __init__(self, **kwargs) -> None:
-        self.rules: str = kwargs.get('rules', constants.EMPTY_STRING)
+        self.rules_str: str = kwargs.get('rules', constants.EMPTY_STRING)
         self.options: list = kwargs.get('options', list())
         self.winning_outcomes: dict[tuple, bool] = kwargs.get('winning_outcomes', dict())
 
     async def rules(self):
-        return self.rules
+        return self.rules_str
 
     async def play(self, **kwargs):
         player_name = kwargs.get('player_name', 'player')
